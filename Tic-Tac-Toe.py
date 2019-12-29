@@ -12,8 +12,8 @@
 # If won:
   # Check who wins
 
-
 # Interested_in_Playing=True
+
 winner=None
 no_winner = True
 current_player=None
@@ -92,7 +92,7 @@ def check_diagonals():
 def check_tie():
   global winner  
   if '-' not in board:
-    winner=None
+    winner='Tie'
     return True
 
 
@@ -100,12 +100,15 @@ def flip_player():
   global current_player
   global Player1_Symbol
   global Player2_Symbol
+  global winner
   if current_player == Player1_Symbol:
     current_player = Player2_Symbol
-    print("\nPlayer 2's turn")
+    if winner==None:
+      print("\nPlayer 2's turn")
   elif current_player == Player2_Symbol:
     current_player = Player1_Symbol
-    print("\nPlayer 1's turn")
+    if winner==None:
+      print("\nPlayer 1's turn")
 
 
 def choose_symbol():
@@ -123,13 +126,13 @@ def start_game():
   choose_symbol() #Choose the symbol to play with
   while no_winner:
     player_turn(current_player) #Handle a single turn
-    flip_player() #Flips the players turn
     check_end_status() #Check if the match ended
+    flip_player() #Flips the players turn
   if winner == Player1_Symbol:
-    print("Player 1 wins")
+    print("\nPlayer 1 wins")
   elif winner == Player2_Symbol:
-    print("Player 2 wins")
-  elif winner == None:
-    print("The match is tied")
+    print("\nPlayer 2 wins")
+  elif winner == 'Tie':
+    print("\nThe match is tied")
 
 start_game()
